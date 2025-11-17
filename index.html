@@ -40,6 +40,8 @@
         /* Base styling */
         body {
             font-family: 'Inter', sans-serif;
+            /* This complex animated gradient is the key to the "luxurious" feel and
+               provides a background for the "liquid glass" to blur. */
             background: linear-gradient(115deg, 
                 #0a0a0a 10%, 
                 #2b210a 30%, 
@@ -50,7 +52,7 @@
             background-size: 200% 200%;
             animation: gradient-flow 18s ease infinite;
             color: #FDFDFD;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevents horizontal scroll from gradient */
         }
 
         /* Gradient animation */
@@ -62,11 +64,11 @@
 
         /* The "Liquid Glass" (Glassmorphism) class */
         .glass-ui {
-            background: rgba(10, 10, 10, 0.25);
+            background: rgba(10, 10, 10, 0.25); /* Dark, translucent base */
             backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            -webkit-backdrop-filter: blur(16px) saturate(180%); /* For Safari */
+            border: 1px solid rgba(212, 175, 55, 0.2); /* Faint golden border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
         }
 
         /* Gold gradient text */
@@ -182,11 +184,12 @@
                     <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
                          data-category="weddings" 
                          data-video-source="vimeo" 
-                         data-video-id="907661500">
+                         data-video-id="820942204">
                         <div class="relative">
-                            <!-- Updated thumbnail path -->
-                            <img src= "thumbnails/The Amahle Wedding.jpg" 
-                                 alt="A beautiful shot from The Amahle Wedding film" 
+                            <!-- This is the manual thumbnail path. -->
+                            <!-- Make sure you create a 'thumbnails' folder and put an image named 'The-Amahle-Wedding.jpg' inside it. -->
+                            <img src="thumbnails/The-Amahle-Wedding.jpg" 
+                                 alt="The Amahle Wedding Film" 
                                  class="w-full h-96 object-cover object-center"
                                  onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=The+Amahle+Wedding'">
                             <!-- Play Icon Overlay -->
@@ -377,10 +380,10 @@
                          data-video-source="youtube" 
                          data-video-id="VIDEO_ID_HERE">
                         <div class="relative">
-                            <img src="https://placehold.co/600x800/3c2f0f/E6C88C?text=N+&+D's+Story" 
+                            <img src="https://placehold.co/600x800/3c2f0f/E6C88C?text=N+&+D%27s+Story" 
                                  alt="N & D's Story" 
                                  class="w-full h-96 object-cover object-center"
-                                 onerror="this.src='https://placehold.co/600x800/3c2f0f/E6C88C?text=N+&+D%27s+Story'">
+                                 onerror="this.src='https_placehold.co/600x800/3c2f0f/E6C88C?text=N+&+D%27s+Story'">
                             <!-- Play Icon Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
@@ -404,7 +407,7 @@
                             <img src="https://placehold.co/600x800/2b210a/E6C88C?text=Sante+Launch+Party" 
                                  alt="Sante Launch Party" 
                                  class="w-full h-96 object-cover object-center"
-                                 onerror="this.src='https://placehold.co/600x800/2b210a/E6C88C?text=Sante+Launch+Party'">
+                                 onerror="this.src='https_placehold.co/600x800/2b210a/E6C88C?text=Sante+Launch+Party'">
                             <!-- Play Icon Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
@@ -428,7 +431,7 @@
                             <img src="https://placehold.co/600x800/3c2f0f/E6C88C?text=The+Legacy+Ball" 
                                  alt="The Legacy Ball" 
                                  class="w-full h-96 object-cover object-center"
-                                 onerror="this.src='https://placehold.co/600x800/3c2f0f/E6C88C?text=The+Legacy+Ball'">
+                                 onerror="this.src='https_placehold.co/600x800/3c2f0f/E6C88C?text=The+Legacy+Ball'">
                             <!-- Play Icon Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
@@ -449,10 +452,10 @@
                          data-video-source="youtube" 
                          data-video-id="VIDEO_ID_HERE">
                         <div class="relative">
-                            <img src="https://placehold.co/600x800/201a05/E6C88C?text=Amara's+50th" 
+                            <img src="https://placehold.co/600x800/201a05/E6C88C?text=Amara%27s+50th" 
                                  alt="Amara's 50th" 
                                  class="w-full h-96 object-cover object-center"
-                                 onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=Amara%27s+50th'">
+                                 onerror="this.src='https_placehold.co/600x800/201a05/E6C88C?text=Amara%27s+50th'">
                             <!-- Play Icon Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
@@ -476,7 +479,7 @@
                             <img src="https://placehold.co/600x800/2a1f0a/E6C88C?text=Art+Accra+2024" 
                                  alt="Art Accra 2024" 
                                  class="w-full h-96 object-cover object-center"
-                                 onerror="this.src='https://placehold.co/600x800/2a1f0a/E6C88C?text=Art+Accra+2024'">
+                                 onerror="this.src='https_placehold.co/600x800/2a1f0a/E6C88C?text=Art+Accra+2024'">
                             <!-- Play Icon Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
@@ -500,7 +503,7 @@
                             <img src="https://placehold.co/600x800/1a1a0a/E6C88C?text=Tech+Summit+Live" 
                                  alt="Tech Summit Live" 
                                  class="w-full h-96 object-cover object-center"
-                                 onerror="this.src='https://placehold.co/600x800/1a1a0a/E6C88C?text=Tech+Summit+Live'">
+                                 onerror="this.src='https_placehold.co/600x800/1a1a0a/E6C88C?text=Tech+Summit+Live'">
                             <!-- Play Icon Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
@@ -524,7 +527,7 @@
                             <img src="https://placehold.co/600x800/3d2f0f/E6C88C?text=The+Coastal+Run" 
                                  alt="The Coastal Run" 
                                  class="w-full h-96 object-cover object-center"
-                                 onerror="this.src='https://placehold.co/600x800/3d2f0f/E6C88C?text=The+Coastal+Run'">
+                                 onerror="this.src='https.placehold.co/600x800/3d2f0f/E6C88C?text=The+Coastal+Run'">
                             <!-- Play Icon Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
@@ -548,7 +551,7 @@
                             <img src="https://placehold.co/600x800/2b210a/E6C88C?text=Eclipse+Concert" 
                                  alt="Eclipse Concert" 
                                  class="w-full h-96 object-cover object-center"
-                                 onerror="this.src='https://placehold.co/600x800/2b210a/E6C88C?text=Eclipse+Concert'">
+                                 onerror="this.src='https.placehold.co/600x800/2b210a/E6C88C?text=Eclipse+Concert'">
                             <!-- Play Icon Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
@@ -572,7 +575,7 @@
                             <img src="https://placehold.co/600x800/201a05/E6C88C?text=The+Aburi+Vows" 
                                  alt="The Aburi Vows" 
                                  class="w-full h-96 object-cover object-center"
-                                 onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=The+Aburi+Vows'">
+                                 onerror="this.src='https.placehold.co/600x800/201a05/E6C88C?text=The+Aburi+Vows'">
                             <!-- Play Icon Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
@@ -596,7 +599,7 @@
                             <img src="https://placehold.co/600x800/2a1f0a/E6C88C?text=City+Celebration" 
                                  alt="City Celebration" 
                                  class="w-full h-96 object-cover object-center"
-                                 onerror="this.src='https://placehold.co/600x800/2a1f0a/E6C88C?text=City+Celebration'">
+                                 onerror="this.src='https.placehold.co/600x800/2a1f0a/E6C88C?text=City+Celebration'">
                             <!-- Play Icon Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
@@ -624,7 +627,7 @@
                         Our Artistic <span class="text-gradient-gold">Vision</span>
                     </h2>
                     <p class="text-gray-300 text-lg leading-relaxed mb-4">
-                        At PIXILLAB, we believe that video isn't just about recording an event—it's about capturing the *emotion* and *energy* of a moment. Our style is cinematic, intimate, and authentic.
+                        At PIXILLAB, we believe that video isn't just about recording an event it's about capturing the emotion and energy of a moment. Our style is cinematic, intimate, and authentic.
                     </p>
                     <p class="text-gray-300 text-lg leading-relaxed">
                         From the first consultation to the final edit, we pour passion into every project, ensuring your story is told in the most beautiful and moving way possible.
@@ -646,7 +649,6 @@
                 <div class="glass-ui rounded-3xl max-w-2xl mx-auto p-8 md:p-12">
                     <p class="text-lg text-gray-300 text-center mb-8">
                         Ready to tell your story? Please fill out the form below for a custom quote and consultation.
-                    <!-- FIXED: Typo </S> changed to </p> -->
                     </p>
                     <form action="#" method="POST">
                         <div class="space-y-6">
@@ -697,22 +699,19 @@
             <div class="max-w-4xl mx-auto">
                 <div class="flex justify-center flex-wrap space-x-8 mb-6">
                     <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Instagram</a>
-                    <!-- FIXED: Typo 3D00 changed to 300 -->
                     <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Vimeo</a>
                     <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Facebook</a>
                 </div>
                 <div class="flex justify-center flex-wrap space-x-6 text-sm mb-6">
                     <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Booking Process</a>
-                    <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Privacy Policy</a>
+                    <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-3J00">Privacy Policy</a>
                     <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Terms of Service</a>
                 </div>
                 <!-- WhatsApp Number -->
-                <!-- FIXED: Typo classDe changed to class -->
                 <div class="mb-6">
                     <span class="font-semibold text-gray-300">WhatsApp: </span>
-                    <!-- FIXED: Typo httpsm changed to https -->
                     <a href="https://wa.me/233557139051" target="_blank" rel="noopener noreferrer" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">
-                        +233 55 713 9051
+                        +233 261757535
                     </a>
                 </div>
                 <p class="font-semibold text-gray-300">&copy; 2025 PIXILLAB. All Rights Reserved. Cinematic Storytelling.</p>
@@ -721,7 +720,7 @@
         
     </div>
 
-    <!-- Video Modal (Restored) -->
+    <!-- Video Modal -->
     <div id="video-modal" class="hidden fixed inset-0 z-50 w-screen h-screen flex items-center justify-center p-4">
         <!-- Modal Backdrop -->
         <div id="modal-backdrop" class="fixed inset-0 bg-black/70 glass-ui"
@@ -747,18 +746,24 @@
     <!-- Combined JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
             // --- Page/Filter Elements ---
             const categoryFilter = document.getElementById('category-filter');
             const productGrid = document.getElementById('product-grid');
+            
+            // Get all product cards as a static array to preserve original order
+            // Check if productGrid exists before querying
             const productCards = productGrid ? Array.from(productGrid.querySelectorAll('.product-card')) : [];
 
             function applyFilter() {
+                // Ensure elements exist before accessing their value
                 const selectedCategory = categoryFilter ? categoryFilter.value : 'all';
+
+                // 1. Apply Filtering and get a list of visible cards
                 productCards.forEach(card => {
                     const cardCategory = card.dataset.category;
                     const matchesCategory = (selectedCategory === 'all' || cardCategory === selectedCategory);
                     
+                    // Show/hide based on filter
                     if (matchesCategory) {
                         card.classList.remove('hidden');
                     } else {
@@ -767,6 +772,7 @@
                 });
             }
 
+            // Add event listeners to the filter dropdown, but only if it exists
             if (categoryFilter) {
                 categoryFilter.addEventListener('change', applyFilter);
             }
@@ -777,17 +783,27 @@
             const mobileMenu = document.getElementById('mobile-menu');
 
             const openMenu = () => {
-                if (mobileMenu) mobileMenu.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('hidden');
+                }
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
             };
             
             const closeMenu = () => {
-                if (mobileMenu) mobileMenu.classList.add('hidden');
-                document.body.style.overflow = '';
+                if (mobileMenu) {
+                    mobileMenu.classList.add('hidden');
+                }
+                document.body.style.overflow = ''; // Allow scrolling again
             };
 
-            if (mobileMenuButton) mobileMenuButton.addEventListener('click', openMenu);
-            if (mobileMenuCloseButton) mobileMenuCloseButton.addEventListener('click', closeMenu);
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', openMenu);
+            }
+            if (mobileMenuCloseButton) {
+                mobileMenuCloseButton.addEventListener('click', closeMenu);
+            }
+            
+            // Close menu if a link is clicked
             if (mobileMenu) {
                 mobileMenu.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', closeMenu);
@@ -799,27 +815,43 @@
             const pages = document.querySelectorAll('.page-content');
 
             function showPage(pageId) {
-                pages.forEach(page => page.classList.add('hidden'));
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.add('hidden');
+                });
                 
+                // Show the target page
                 const targetPage = document.getElementById('page-' + pageId);
                 if (targetPage) {
                     targetPage.classList.remove('hidden');
                 } else {
+                    // Fallback to home if page not found
                     const homePage = document.getElementById('page-home');
-                    if (homePage) homePage.classList.remove('hidden');
+                    if (homePage) {
+                        homePage.classList.remove('hidden');
+                    }
                 }
+                
+                // Scroll to top of the page
                 window.scrollTo(0, 0);
             }
 
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
-                    e.preventDefault();
+                    e.preventDefault(); // Stop the link from trying to navigate
                     const pageId = link.dataset.page;
-                    if (pageId) showPage(pageId);
+                    if (pageId) { // Ensure pageId is not null/undefined
+                        showPage(pageId);
+                        
+                        // Close mobile menu on navigation
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            closeMenu();
+                        }
+                    }
                 });
             });
 
-            // --- Video Modal Logic (Restored) ---
+            // --- Video Modal Logic (NEW) ---
             const videoModal = document.getElementById('video-modal');
             const modalBackdrop = document.getElementById('modal-backdrop');
             const modalCloseButton = document.getElementById('modal-close-button');
@@ -884,8 +916,10 @@
             if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
 
             // --- Initial Page Load ---
+            // Ensure home page is shown on load by default
             showPage('home');
         });
     </script>
+
 </body>
 </html>
