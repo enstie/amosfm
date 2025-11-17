@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXILLAB - Cinematic Videography</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Added Playfair Display for the brand name -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <script>
+        // Tailwind configuration
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'gold': '#D4AF37',
+                        'soft-gold': '#E6C88C',
+                        'deep-black': '#0a0a0a',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Combined CSS -->
+    <style>
+        /* Base styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(115deg, 
+                #0a0a0a 10%, 
+                #2b210a 30%, 
+                #c39f2f 50%, 
+                #2b210a 70%, 
+                #0a0a0a 90%
+            );
+            background-size: 200% 200%;
+            animation: gradient-flow 18s ease infinite;
+            color: #FDFDFD;
+            overflow-x: hidden;
+        }
+
+        /* Gradient animation */
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* The "Liquid Glass" (Glassmorphism) class */
+        .glass-ui {
+            background: rgba(10, 10, 10, 0.25);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Gold gradient text */
+        .text-gradient-gold {
+            background: linear-gradient(to right, #E6C88C, #D4AF37, #E6C88C);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Video modal content style */
+        #video-content {
+            aspect-ratio: 16 / 9;
+        }
+    </style>
+</head>
+<body class="bg-deep-black min-h-screen">
+
+    <div class="relative z-10 p-4 md:p-8 max-w-7xl mx-auto">
+        
+        <!-- Header & Navigation -->
+        <header class="glass-ui rounded-full w-full max-w-4xl mx-auto p-4 px-8 sticky top-4 z-50">
+            <nav class="flex justify-between items-center">
+                <a href="#" class="nav-link text-4xl font-bold font-playfair text-gradient-gold" data-page="home">PIXILLAB</a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="nav-link text-gray-200 hover:text-gold transition-colors duration-300" data-page="home">Home</a>
+                    <a href="#" class="nav-link text-gray-200 hover:text-gold transition-colors duration-300" data-page="portfolio">Portfolio</a>
+                    <a href="#" class="nav-link text-gray-200 hover:text-gold transition-colors duration-300" data-page="about">About</a>
+                    <a href="#" class="nav-link text-gray-200 hover:text-gold transition-colors duration-300" data-page="contact">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" aria-label="Open menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Mobile Menu (Fullscreen Overlay) -->
+        <div id="mobile-menu" 
+             class="hidden fixed inset-0 z-40 h-screen w-screen glass-ui"
+             style="backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); background: rgba(0,0,0,0.5);">
+            
+            <button id="mobile-menu-close-button" class="absolute top-8 right-8" aria-label="Close menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            
+            <nav class="flex flex-col items-center justify-center h-full space-y-10">
+                <a href="#" class="nav-link text-4xl font-bold text-gray-200 hover:text-gold transition-colors duration-300" data-page="home">Home</a>
+                <a href="#" class="nav-link text-4xl font-bold text-gray-200 hover:text-gold transition-colors duration-300" data-page="portfolio">Portfolio</a>
+                <a href="#" class="nav-link text-4xl font-bold text-gray-200 hover:text-gold transition-colors duration-300" data-page="about">About</a>
+                <a href="#" class="nav-link text-4xl font-bold text-gray-200 hover:text-gold transition-colors duration-300" data-page="contact">Contact</a>
+            </nav>
+        </div>
+
+        <!-- Main Content Area -->
+        
+        <!-- === HOME PAGE === -->
+        <main id="page-home" class="page-content">
+            
+            <!-- Hero Section -->
+            <section class="mt-20 md:mt-32 text-center flex flex-col items-center">
+                <div class="glass-ui rounded-3xl p-8 md:p-16 max-w-4xl mx-auto">
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight">
+                        Your Story,
+                        <span class="text-gradient-gold block mt-2 md:mt-4">In Motion</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mt-6">
+                        We capture life's most precious moments with an artistic, cinematic lens. Specializing in luxury weddings and compelling brand stories.
+                    </p>
+                    <a href="#" class="nav-link inline-block mt-10 px-10 py-4 rounded-full bg-gold text-deep-black text-lg font-bold
+                                   hover:bg-soft-gold transition-all duration-300 
+                                   transform hover:scale-105 shadow-lg shadow-gold/20"
+                       data-page="portfolio">
+                        View Our Portfolio
+                    </a>
+                </div>
+            </section>
+        </main>
+        
+        <!-- === PORTFOLIO PAGE === -->
+        <main id="page-portfolio" class="page-content hidden">
+            <section class="mt-24 md:mt-32">
+                <h2 class="text-4xl font-bold text-center mb-12">
+                    Recent <span class="text-gradient-gold">Works</span>
+                </h2>
+                
+                <!-- Filter Controls -->
+                <div class="glass-ui rounded-xl p-4 mb-8 max-w-lg mx-auto flex justify-center items-center gap-4">
+                    <div class="w-full md:w-auto">
+                        <label for="category-filter" class="block text-sm font-medium text-gray-300 mb-1 ml-2">Filter by Service</label>
+                        <select id="category-filter" class="w-full md:w-48 bg-gray-900/50 border border-gold/30 text-white rounded-lg p-2 focus:ring-gold focus:border-gold">
+                            <option value="all">All Projects</option>
+                            <option value="weddings">Weddings</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="events">Events</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Grid: Updated with data-video-*, cursor-pointer, and 'group' -->
+                <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Portfolio Card 1 (Vimeo example, manual thumbnail) -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="weddings" 
+                         data-video-source="vimeo" 
+                         data-video-id="907661500">
+                        <div class="relative">
+                            <!-- Updated thumbnail path -->
+                            <img src= "thumbnails/The Amahle Wedding.jpg" 
+                                 alt="A beautiful shot from The Amahle Wedding film" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=The+Amahle+Wedding'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Amahle Wedding</h3>
+                            <p class="text-gray-300 mt-2">A beautiful coastal ceremony in Accra, full of light and emotion.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Wedding Film</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Card 2 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="commercial" 
+                         data-video-source="vimeo" 
+                         data-video-id="VIDEO_ID_HERE">
+                         <div class="relative">
+                            <img src="https://placehold.co/600x800/2b210a/E6C88C?text=Aura+Jewelry" 
+                                 alt="Aura Jewelry Brand Film" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/2b210a/E6C88C?text=Aura+Jewelry'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">Aura Jewelry</h3>
+                            <p class="text-gray-300 mt-2">Product launch film focusing on the intricate details of the new collection.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Brand Film</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Card 3 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="events" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                         <div class="relative">
+                            <img src="https://placehold.co/600x800/3c2f0f/E6C88C?text=Gold+Gala+2024" 
+                                 alt="The Gold Gala 2024" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/3c2f0f/E6C88C?text=Gold+Gala+2024'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Gold Gala 2024</h3>
+                            <p class="text-gray-300 mt-2">A high-energy recap video of the annual charity event.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Event Highlight</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Card 4 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="weddings" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/2a1f0a/E6C88C?text=Kofi+&+Eliza" 
+                                 alt="Kofi & Eliza's Wedding" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/2a1f0a/E6C88C?text=Kofi+&+Eliza'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">Kofi & Eliza</h3>
+                            <p class="text-gray-300 mt-2">A traditional and white wedding story, told across two days.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Wedding Film</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Card 5 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="commercial" 
+                         data-video-source="vimeo" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/1a1a0a/E6C88C?text=Hive+Properties" 
+                                 alt="Hive Properties" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/1a1a0a/E6C88C?text=Hive+Properties'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">Hive Properties</h3>
+                            <p class="text-gray-300 mt-2">Luxury real estate showcase for a new development.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Commercial</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Card 6 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="weddings" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/3d2f0f/E6C88C?text=The+Lakeside+Vows" 
+                                 alt="The Lakeside Vows" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/3d2f0f/E6C88C?text=The+Lakeside+Vows'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Lakeside Vows</h3>
+                            <p class="text-gray-300 mt-2">An intimate elopement film set by the Volta River.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Elopement Film</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Card 7 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="events" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/2b210a/E6C88C?text=Afrofuture+Recap" 
+                                 alt="Afrofuture Recap" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/2b210a/E6C88C?text=Afrofuture+Recap'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">Afrofuture Recap</h3>
+                            <p class="text-gray-300 mt-2">Capturing the energy and artists of the main event.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Event Highlight</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Card 8 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="commercial" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/201a05/E6C88C?text=Orion+Motors" 
+                                 alt="Orion Motors" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=Orion+Motors'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">Orion Motors</h3>
+                            <p class="text-gray-300 mt-2">A dynamic social media ad for a new luxury car.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Social Media Ad</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Card 9 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="weddings" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/3c2f0f/E6C88C?text=N+&+D's+Story" 
+                                 alt="N & D's Story" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/3c2f0f/E6C88C?text=N+&+D%27s+Story'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">N & D's Story</h3>
+                            <p class="text-gray-300 mt-2">A cinematic short film for a garden wedding.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Wedding Film</p>
+                        </div>
+                    </div>
+                    
+                    <!-- New Event 1 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="events" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/2b210a/E6C88C?text=Sante+Launch+Party" 
+                                 alt="Sante Launch Party" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/2b210a/E6C88C?text=Sante+Launch+Party'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">Sante Launch Party</h3>
+                            <p class="text-gray-300 mt-2">Corporate launch event highlight reel.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Event Highlight</p>
+                        </div>
+                    </div>
+                    
+                    <!-- New Event 2 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="events" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/3c2f0f/E6C88C?text=The+Legacy+Ball" 
+                                 alt="The Legacy Ball" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/3c2f0f/E6C88C?text=The+Legacy+Ball'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Legacy Ball</h3>
+                            <p class="text-gray-300 mt-2">Capturing the elegance of the annual university gala.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Gala Coverage</p>
+                        </div>
+                    </div>
+                    
+                    <!-- New Event 3 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="events" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/201a05/E6C88C?text=Amara's+50th" 
+                                 alt="Amara's 50th" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=Amara%27s+50th'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">Amara's 50th</h3>
+                            <p class="text-gray-300 mt-2">A cinematic birthday film for a milestone celebration.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Birthday Film</p>
+                        </div>
+                    </div>
+                    
+                    <!-- New Event 4 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="events" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/2a1f0a/E6C88C?text=Art+Accra+2024" 
+                                 alt="Art Accra 2024" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/2a1f0a/E6C88C?text=Art+Accra+2024'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">Art Accra 2024</h3>
+                            <p class="text-gray-300 mt-2">Showcasing the artists and installations of the city's art fair.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Event Highlight</p>
+                        </div>
+                    </div>
+                    
+                    <!-- New Event 5 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="events" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/1a1a0a/E6C88C?text=Tech+Summit+Live" 
+                                 alt="Tech Summit Live" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/1a1a0a/E6C88C?text=Tech+Summit+Live'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">Tech Summit Live</h3>
+                            <p class="text-gray-300 mt-2">Sizzle reel for the annual technology conference.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Conference Film</p>
+                        </div>
+                    </div>
+                    
+                    <!-- New Event 6 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="events" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/3d2f0f/E6C88C?text=The+Coastal+Run" 
+                                 alt="The Coastal Run" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/3d2f0f/E6C88C?text=The+Coastal+Run'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Coastal Run</h3>
+                            <p class="text-gray-300 mt-2">Highlight reel for a charity marathon event.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Sporting Event</p>
+                        </div>
+                    </div>
+                    
+                    <!-- New Event 7 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="events" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/2b210a/E6C88C?text=Eclipse+Concert" 
+                                 alt="Eclipse Concert" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/2b210a/E6C88C?text=Eclipse+Concert'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">Eclipse Concert</h3>
+                            <p class="text-gray-300 mt-2">Live music performance and behind-the-scenes.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Live Music Video</p>
+                        </div>
+                    </div>
+                    
+                    <!-- New Wedding 1 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="weddings" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/201a05/E6C88C?text=The+Aburi+Vows" 
+                                 alt="The Aburi Vows" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=The+Aburi+Vows'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Aburi Vows</h3>
+                            <p class="text-gray-300 mt-2">A breathtaking wedding in the Aburi mountains.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Wedding Film</p>
+                        </div>
+                    </div>
+                    
+                    <!-- New Wedding 2 -->
+                    <div class="product-card group glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl cursor-pointer"
+                         data-category="weddings" 
+                         data-video-source="youtube" 
+                         data-video-id="VIDEO_ID_HERE">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x800/2a1f0a/E6C88C?text=City+Celebration" 
+                                 alt="City Celebration" 
+                                 class="w-full h-96 object-cover object-center"
+                                 onerror="this.src='https://placehold.co/600x800/2a1f0a/E6C88C?text=City+Celebration'">
+                            <!-- Play Icon Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-gold" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">City Celebration</h3>
+                            <p class="text-gray-300 mt-2">An elegant and modern hotel wedding in the city.</p>
+                            <p class="text-xl font-semibold text-soft-gold mt-4">Wedding Film</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+        </main>
+        
+        <!-- === ABOUT PAGE === -->
+        <main id="page-about" class="page-content hidden">
+            <!-- About Section -->
+            <section class="glass-ui rounded-3xl my-24 md:my-32 p-10 md:p-16 flex flex-col md:flex-row items-center gap-10">
+                <div class="flex-1">
+                    <h2 class="text-4xl font-bold mb-6">
+                        Our Artistic <span class="text-gradient-gold">Vision</span>
+                    </h2>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-4">
+                        At PIXILLAB, we believe that video isn't just about recording an event—it's about capturing the *emotion* and *energy* of a moment. Our style is cinematic, intimate, and authentic.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        From the first consultation to the final edit, we pour passion into every project, ensuring your story is told in the most beautiful and moving way possible.
+                    </p>
+                </div>
+                <div class="flex-1 flex justify-center items-center p-8 glass-ui rounded-3xl" style="background: rgba(10,10,10,0.3);">
+                     <span class="text-7xl font-bold font-playfair text-gradient-gold opacity-80">PIXILLAB</span>
+                </div>
+            </section>
+        </main>
+        
+        <!-- === CONTACT PAGE === -->
+        <main id="page-contact" class="page-content hidden">
+            <section class="mt-24 md:mt-32">
+                <h2 class="text-4xl font-bold text-center mb-12">
+                    Let's Create <span class="text-gradient-gold">Together</span>
+                </h2>
+                
+                <div class="glass-ui rounded-3xl max-w-2xl mx-auto p-8 md:p-12">
+                    <p class="text-lg text-gray-300 text-center mb-8">
+                        Ready to tell your story? Please fill out the form below for a custom quote and consultation.
+                    <!-- FIXED: Typo </S> changed to </p> -->
+                    </p>
+                    <form action="#" method="POST">
+                        <div class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300 mb-1 ml-2">Full Name</label>
+                                <input type="text" name="name" id="name" required
+                                       class="w-full bg-gray-900/50 border border-gold/30 text-white rounded-lg p-3 focus:ring-gold focus:border-gold"
+                                       placeholder="Your Name">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-1 ml-2">Email Address</label>
+                                <input type="email" name="email" id="email" required
+                                       class="w-full bg-gray-900/50 border border-gold/30 text-white rounded-lg p-3 focus:ring-gold focus:border-gold"
+                                       placeholder="you@example.com">
+                            </div>
+                            <div>
+                                <label for="service-type" class="block text-sm font-medium text-gray-300 mb-1 ml-2">Service Needed</label>
+                                <select id="service-type" name="service-type" class="w-full bg-gray-900/50 border border-gold/30 text-white rounded-lg p-3 focus:ring-gold focus:border-gold">
+                                    <option>Select a service</option>
+                                    <option value="wedding">Wedding Videography</option>
+                                    <option value="commercial">Commercial/Brand Film</option>
+                                    <option value="event">Event Videography</option>
+                                    <option value="other">Other Inquiry</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-300 mb-1 ml-2">Project Details</label>
+                                <textarea name="message" id="message" rows="6" required
+                                          class="w-full bg-gray-900/50 border border-gold/30 text-white rounded-lg p-3 focus:ring-gold focus:border-gold"
+                                          placeholder="Tell me about your project, dates, location, etc..."></textarea>
+                            </div>
+                            <div>
+                                <button type="submit"
+                                        class="w-full mt-4 px-10 py-4 rounded-full bg-gold text-deep-black text-lg font-bold
+                                               hover:bg-soft-gold transition-all duration-300 
+                                               transform hover:scale-105 shadow-lg shadow-gold/20">
+                                    Send Inquiry
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="glass-ui rounded-t-3xl p-10 mt-16 text-center text-gray-400">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex justify-center flex-wrap space-x-8 mb-6">
+                    <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Instagram</a>
+                    <!-- FIXED: Typo 3D00 changed to 300 -->
+                    <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Vimeo</a>
+                    <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Facebook</a>
+                </div>
+                <div class="flex justify-center flex-wrap space-x-6 text-sm mb-6">
+                    <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Booking Process</a>
+                    <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Privacy Policy</a>
+                    <a href="#" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">Terms of Service</a>
+                </div>
+                <!-- WhatsApp Number -->
+                <!-- FIXED: Typo classDe changed to class -->
+                <div class="mb-6">
+                    <span class="font-semibold text-gray-300">WhatsApp: </span>
+                    <!-- FIXED: Typo httpsm changed to https -->
+                    <a href="https://wa.me/233557139051" target="_blank" rel="noopener noreferrer" class="font-semibold text-gray-300 hover:text-gold transition-colors duration-300">
+                        +233 55 713 9051
+                    </a>
+                </div>
+                <p class="font-semibold text-gray-300">&copy; 2025 PIXILLAB. All Rights Reserved. Cinematic Storytelling.</p>
+            </div>
+        </footer>
+        
+    </div>
+
+    <!-- Video Modal (Restored) -->
+    <div id="video-modal" class="hidden fixed inset-0 z-50 w-screen h-screen flex items-center justify-center p-4">
+        <!-- Modal Backdrop -->
+        <div id="modal-backdrop" class="fixed inset-0 bg-black/70 glass-ui"
+             style="backdrop-filter: blur(12px) saturate(150%); -webkit-backdrop-filter: blur(12px) saturate(150%);">
+        </div>
+        
+        <!-- Modal Content -->
+        <div class="relative z-10 w-full max-w-4xl mx-auto">
+            <!-- Close Button -->
+            <button id="modal-close-button" class="absolute -top-10 right-0 text-white hover:text-gold transition-colors" aria-label="Close video player">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            
+            <!-- Video Player -->
+            <div id="video-content" class="w-full bg-black rounded-lg shadow-xl overflow-hidden">
+                <!-- Iframe will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Combined JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Page/Filter Elements ---
+            const categoryFilter = document.getElementById('category-filter');
+            const productGrid = document.getElementById('product-grid');
+            const productCards = productGrid ? Array.from(productGrid.querySelectorAll('.product-card')) : [];
+
+            function applyFilter() {
+                const selectedCategory = categoryFilter ? categoryFilter.value : 'all';
+                productCards.forEach(card => {
+                    const cardCategory = card.dataset.category;
+                    const matchesCategory = (selectedCategory === 'all' || cardCategory === selectedCategory);
+                    
+                    if (matchesCategory) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            }
+
+            if (categoryFilter) {
+                categoryFilter.addEventListener('change', applyFilter);
+            }
+
+            // --- Mobile Menu Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            const openMenu = () => {
+                if (mobileMenu) mobileMenu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            };
+            
+            const closeMenu = () => {
+                if (mobileMenu) mobileMenu.classList.add('hidden');
+                document.body.style.overflow = '';
+            };
+
+            if (mobileMenuButton) mobileMenuButton.addEventListener('click', openMenu);
+            if (mobileMenuCloseButton) mobileMenuCloseButton.addEventListener('click', closeMenu);
+            if (mobileMenu) {
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+            }
+
+            // --- Page Navigation Logic ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page-content');
+
+            function showPage(pageId) {
+                pages.forEach(page => page.classList.add('hidden'));
+                
+                const targetPage = document.getElementById('page-' + pageId);
+                if (targetPage) {
+                    targetPage.classList.remove('hidden');
+                } else {
+                    const homePage = document.getElementById('page-home');
+                    if (homePage) homePage.classList.remove('hidden');
+                }
+                window.scrollTo(0, 0);
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.dataset.page;
+                    if (pageId) showPage(pageId);
+                });
+            });
+
+            // --- Video Modal Logic (Restored) ---
+            const videoModal = document.getElementById('video-modal');
+            const modalBackdrop = document.getElementById('modal-backdrop');
+            const modalCloseButton = document.getElementById('modal-close-button');
+            const videoContent = document.getElementById('video-content');
+            const allPortfolioCards = document.querySelectorAll('.product-card');
+
+            function createVideoPlayer(source, videoId) {
+                let iframe = document.createElement('iframe');
+                iframe.setAttribute('class', 'w-full h-full');
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+                
+                if (source === 'youtube') {
+                    iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`);
+                } else if (source === 'vimeo') {
+                    iframe.setAttribute('src', `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`);
+                }
+                return iframe;
+            }
+
+            function openModal(source, videoId) {
+                if (!videoModal || !videoContent) return;
+                
+                // Clear any old video
+                videoContent.innerHTML = ''; 
+                
+                // Create and add the new video
+                const videoPlayer = createVideoPlayer(source, videoId);
+                videoContent.appendChild(videoPlayer);
+                
+                // Show the modal
+                videoModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                if (!videoModal || !videoContent) return;
+                
+                // Stop the video by clearing the content
+                videoContent.innerHTML = '';
+                
+                // Hide the modal
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+
+            // Add click listeners to all portfolio cards
+            allPortfolioCards.forEach(card => {
+                const source = card.dataset.videoSource;
+                const videoId = card.dataset.videoId;
+                
+                // Only add click listener if the video ID is present and not a placeholder
+                if (source && videoId && videoId !== 'VIDEO_ID_HERE') {
+                    card.addEventListener('click', () => {
+                        openModal(source, videoId);
+                    });
+                }
+            });
+
+            // Add close listeners
+            if (modalCloseButton) modalCloseButton.addEventListener('click', closeModal);
+            if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+
+            // --- Initial Page Load ---
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
